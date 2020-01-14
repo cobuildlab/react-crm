@@ -6,6 +6,7 @@
     "@8base/app-provider": "^0.37.2",
     "@8base/react-sdk": "^0.37.2",
     "@apollo/react-hooks": "^3.1.3",
+    "@lourenci/react-kanban": "^0.15.0",
     "apollo-client": "^2.6.4",
     "graphql": "^14.5.7",
     "graphql-tag": "^2.9.2",
@@ -14,7 +15,8 @@
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.1.2",
-    "recompose": "^0.30.0"
+    "recompose": "^0.30.0",
+    "styled-components": "^5.0.0"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -1,7 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
-import { AuthButton } from './AuthButton';
+import {AuthButton} from './AuthButton';
 
 const NavBar = () => (
   <div id="nav">
@@ -10,15 +10,17 @@ const NavBar = () => (
       {/* eslint-disable-next-line jsx-a11y/accessible-emoji */}
       ReactJS <span>❤️</span> 8base
     </h1>
-    <br />
+    <br/>
     <Link to="/">Home</Link>
     <span> | </span>
     <Link to="/new">New Opportunity</Link>
     <span> | </span>
+    <Link to="/kanban">Kanban</Link>
+    <span> | </span>
     <Link to="/profile">Profile</Link>
     <span> | </span>
-    <AuthButton />
+    <AuthButton/>
   </div>
 );
 
-export { NavBar };
+export {NavBar};

@@ -11,6 +11,7 @@ import {Home} from './home';
 import {Profile} from './profile';
 import {AuthCallback} from './auth';
 import {NewOpportunityForm} from "./NewOpportunityForm";
+import {OpportunityKanban} from "./OpportunityKanban";
 
 const Router = (props) => {
   const {auth: {isAuthorized}} = props;
@@ -20,6 +21,7 @@ const Router = (props) => {
       <Route exact path="/" component={Home}/>
       <Route exact path="/new" component={NewOpportunityForm}/>
       <ProtectedRoute exact path="/profile" component={Profile}/>
+      <ProtectedRoute exact path="/kanban" component={OpportunityKanban}/>
       <Redirect to="/"/>
     </Switch>
   );

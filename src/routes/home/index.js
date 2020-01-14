@@ -1,23 +1,7 @@
 import React from 'react';
 import {useQuery, useMutation} from "@apollo/react-hooks";
 import gql from "graphql-tag";
-import {useHistory} from 'react-router-dom';
-
-
-const OPPORTUNITIES_LIST_QUERY = gql`
-    query opportunitiesList{
-        opportunitiesList{
-            items{
-                id
-                createdAt
-                name
-                address
-                phoneNumber
-            }
-        }
-    }
-
-`;
+import {OPPORTUNITIES_LIST_QUERY, OPPORTUNITY_UPDATE_MUTATION} from "../queries";
 
 const USER_QUERY = gql`
     {
@@ -28,19 +12,13 @@ const USER_QUERY = gql`
     }
 `;
 
-const TASK_UPDATE_MUTATION = gql`
-    mutation($data:TaskUpdateInput!){
-        taskUpdate(data:$data){
-            id
-        }
-    }
-`;
+
 
 
 const Opportunity = ({user}) => {
   const [success, setSuccess] = React.useState(false);
   const {data, loading, refetch} = useQuery(OPPORTUNITIES_LIST_QUERY, {fetchPolicy: "network-only"});
-  const [updateTask] = useMutation(TASK_UPDATE_MUTATION);
+  const [updateTask] = useMutation(OPPORTUNITY_UPDATE_MUTATION);
 
   if (!user || loading)
     return null;
