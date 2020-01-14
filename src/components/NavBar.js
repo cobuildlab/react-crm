@@ -13,7 +13,7 @@ const NavBar = () => (
     <br />
     <Link to="/">Home</Link>
     <span> | </span>
-    <Link to="/new">New Task</Link>
+    <Link to="/new">New Opportunity</Link>
     <span> | </span>
     <Link to="/profile">Profile</Link>
     <span> | </span>

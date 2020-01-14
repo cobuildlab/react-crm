@@ -1,21 +1,22 @@
 import React from 'react';
 import {useQuery, useMutation} from "@apollo/react-hooks";
 import gql from "graphql-tag";
+import {useHistory} from 'react-router-dom';
 
-const TASK_LIST_QUERY = gql`
-    query TaskQuery($filter: TaskFilter){
-        tasksList(filter: $filter){
-            count
-            items {
+
+const OPPORTUNITIES_LIST_QUERY = gql`
+    query opportunitiesList{
+        opportunitiesList{
+            items{
                 id
-                name
-                description
                 createdAt
-                done
-                doneDate
+                name
+                address
+                phoneNumber
             }
         }
     }
+
 `;
 
 const USER_QUERY = gql`
@@ -36,20 +37,9 @@ const TASK_UPDATE_MUTATION = gql`
 `;
 
 
-const Tasks = ({user}) => {
+const Opportunity = ({user}) => {
   const [success, setSuccess] = React.useState(false);
-  const {data, loading, refetch} = useQuery(TASK_LIST_QUERY, {
-    variables: {
-      "filter": {
-        "assignee": {
-          "id": {
-            "equals": user ? user.id : null
-          }
-        },
-        hide: {"equals": false}
-      }
-    }
-  });
+  const {data, loading, refetch} = useQuery(OPPORTUNITIES_LIST_QUERY, {fetchPolicy: "network-only"});
   const [updateTask] = useMutation(TASK_UPDATE_MUTATION);
 
   if (!user || loading)
@@ -92,38 +82,36 @@ const Tasks = ({user}) => {
     refetch();
   };
 
-  const {tasksList: {items}} = data;
-  console.log(`DEBUG:`, items);
+  console.log(`DEBUG:`, data.opportunitiesList);
+
+  const {opportunitiesList: {items}} = data;
+
   return (
     <>
-      {success && <p>Task UPDATED!</p>}
+      {/*{success && <p>Task UPDATED!</p>}*/}
       <table>
         <thead>
         <tr>
+          <td>#</td>
           <td>NAME</td>
-          <td>DESCRIPTION</td>
+          <td>ADDRESS</td>
+          <td>PHONE NUMBER</td>
           <td>Created At</td>
-          <td>Done?</td>
-          <td>Done Date</td>
           <td>Options</td>
         </tr>
         </thead>
         <tbody>
-        {items.map((task, i) => {
+        {items.map((opp, i) => {
           return (
             <tr key={i}>
-              <td>{task.name}</td>
-              <td>{task.description}</td>
-              <td>{task.createdAt}</td>
-              <td>{task.done ? 'DONE' : 'NOT DONE'}</td>
-              <td>{task.doneDate}</td>
+              <td>{i + 1}</td>
+              <td>{opp.name}</td>
+              <td>{opp.address}</td>
+              <td>{opp.phoneNumber}</td>
               <td>
-                {task.done ?
-                  <input type={'button'} value={'HIDE'} onClick={(e) => hide(e, task.id)}/>
-                  :
-                  <input type={'button'} value={'MARK AS DONE'} onClick={(e) => markDone(e, task.id)}/>
-                }
+                {opp.createdAt}
               </td>
+              <td>OPTIONS</td>
             </tr>
           )
         })}
@@ -141,8 +129,8 @@ const Home = () => {
   const {user} = data;
   return (
     <div>
-      <h1>Tasks!</h1>
-      <Tasks user={user}/>
+      <h1>Opportunities!</h1>
+      <Opportunity user={user}/>
     </div>
   );
 };

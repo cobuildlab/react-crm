@@ -10,8 +10,7 @@ import {NavBar} from '../components';
 import {Home} from './home';
 import {Profile} from './profile';
 import {AuthCallback} from './auth';
-import {NewTaskForm} from "./NewTaskForm";
-import {useQuery} from "@apollo/react-hooks";
+import {NewOpportunityForm} from "./NewOpportunityForm";
 
 const Router = (props) => {
   const {auth: {isAuthorized}} = props;
@@ -19,7 +18,7 @@ const Router = (props) => {
   let routes = (
     <Switch>
       <Route exact path="/" component={Home}/>
-      <Route exact path="/new" component={NewTaskForm}/>
+      <Route exact path="/new" component={NewOpportunityForm}/>
       <ProtectedRoute exact path="/profile" component={Profile}/>
       <Redirect to="/"/>
     </Switch>
