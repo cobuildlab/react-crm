@@ -79,7 +79,7 @@ const OpportunityKanban = () => {
         console.log(`DEBUG:card`, newStage);
 
         //splice
-        // push 
+        // push
         updateOpp(cardId, newStage);
       }}>
         {board}
